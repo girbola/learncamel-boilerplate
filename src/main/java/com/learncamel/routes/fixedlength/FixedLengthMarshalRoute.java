@@ -6,18 +6,17 @@ import org.apache.camel.spi.DataFormat;
 
 import com.learncamel.domain.EmployeeWithFixedLength;
 
-public class FixedLengthUnMarshalCamelRoute extends RouteBuilder{
+public class FixedLengthMarshalRoute extends RouteBuilder{
 
 	@Override
 	public void configure() throws Exception {
-
-		DataFormat bindy = new BindyFixedLengthDataFormat(EmployeeWithFixedLength.class);
 		
-		from("file:data/fixedlength/input?fileName=fixedlength.txt&noop=true")
-		.unmarshal(bindy)
-		.log("UnMarshaled Message is ${body}")
-		.to("direct:output");
+		DataFormat  bindy = new BindyFixedLengthDataFormat(EmployeeWithFixedLength.class);
 		
+		from("direct:input")
+		.marshal(bindy)
+		.log("Marshaled message is ${body}")
+		.to("file:data/fixedlength/output?fileName=output.txt");
 	}
 
 }

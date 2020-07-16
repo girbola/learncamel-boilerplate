@@ -7,8 +7,6 @@ import org.apache.camel.Processor;
 
 import com.learncamel.domain.Employee;
 
-import sun.util.locale.StringTokenIterator;
-
 public class CustomProcessorXstream implements Processor {
 
 	@Override
